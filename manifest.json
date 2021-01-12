@@ -1,0 +1,45 @@
+{
+    "manifest_version": 2,
+    "name": "POMP",
+    "description": "pomp",
+    "version": "1.0",
+    "externally_connectable": {
+        "matches": [
+            "*://pompserver.leed.at/*",
+            "*://pomp.leed.at/*",
+            "*://docs.google.com/forms/*"
+        ]
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "*://docs.google.com/forms/*"
+            ],
+            "css": [
+                "style.css"
+            ],
+            "js": [
+                "preload.js"
+            ]
+        }
+    ],
+    "browser_action": {
+        "default_icon": "./ico/favicon.png"
+    },
+    "permissions": [
+        "tabs",
+        "notifications",
+        "activeTab",
+        "*://docs.google.com/forms/*",
+        "*://pompserver.leed.at/*",
+        "*://pomp.leed.at/*",
+        "storage",
+        "*://*.google.com/*"
+    ],
+    "background": {
+        "scripts": [
+            "background.js"
+        ],
+        "persistent": false
+    }
+}
