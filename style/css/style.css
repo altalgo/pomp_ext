@@ -5,7 +5,7 @@ body {
   width: 400px;
   min-height: 55px;
 }
-.container{
+.container {
   position: relative;
   padding-top: 3px;
   padding-left: 15px;
@@ -24,7 +24,7 @@ body {
   display: inline-block;
 }
 .switch--container .switch--status {
-  display:inline-block;
+  display: inline-block;
   width: 33px;
   font-family: "carmen-bold";
   font-size: 19px;
@@ -32,7 +32,7 @@ body {
 .switch--wrapper {
   margin-left: 7px;
   position: relative;
-  display:inline-block;
+  display: inline-block;
 }
 .switch--wrapper .switch--stick {
   display: inline-block;
@@ -58,7 +58,7 @@ body {
 }
 .off--stick {
   transition-duration: 700ms;
-  border: 1px solid #3E3E3E;
+  border: 1px solid #3e3e3e;
   background-color: #ffffff;
 }
 .on--ball {
@@ -69,7 +69,7 @@ body {
 }
 .off--ball {
   transition-duration: 700ms;
-  border: 1px solid #3E3E3E;
+  border: 1px solid #3e3e3e;
   background-color: #ffffff;
 }
 .logout {
@@ -81,4 +81,20 @@ body {
   cursor: pointer;
   font-family: "carmen-bold";
   font-size: 17px;
+}
+.login {
+  position: absolute;
+  top: 14px;
+  right: 17px;
+
+  display: inline-block;
+  cursor: pointer;
+  font-family: "carmen-bold";
+  font-size: 17px;
+}
+.hide {
+  visibility: hidden;
+}
+.show {
+  visibility: visible;
 }
