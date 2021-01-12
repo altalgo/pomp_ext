@@ -1,0 +1,84 @@
+a {
+  text-decoration: none;
+}
+body {
+  width: 400px;
+  min-height: 55px;
+}
+.container{
+  position: relative;
+  padding-top: 3px;
+  padding-left: 15px;
+}
+.pomp {
+  display: inline-block;
+}
+.pomp span {
+  font-family: "carmen-heavy";
+  font-size: 29px;
+  letter-spacing: -1.1px;
+}
+.switch--container {
+  margin-left: 89px;
+  cursor: pointer;
+  display: inline-block;
+}
+.switch--container .switch--status {
+  display:inline-block;
+  width: 33px;
+  font-family: "carmen-bold";
+  font-size: 19px;
+}
+.switch--wrapper {
+  margin-left: 7px;
+  position: relative;
+  display:inline-block;
+}
+.switch--wrapper .switch--stick {
+  display: inline-block;
+
+  width: 38px;
+  height: 12px;
+  border-radius: 20px;
+}
+.switch--wrapper .switch--ball {
+  position: absolute;
+  left: 0;
+  top: -1.6px;
+
+  width: 16px;
+  height: 16px;
+
+  border-radius: 50%;
+}
+.on--stick {
+  transition-duration: 700ms;
+  border: 1px solid #92a8d1;
+  background-color: #92a8d1;
+}
+.off--stick {
+  transition-duration: 700ms;
+  border: 1px solid #3E3E3E;
+  background-color: #ffffff;
+}
+.on--ball {
+  transform: translateX(24px);
+  transition-duration: 700ms;
+  background-color: #92a8d1;
+  border: 1px solid #dedede;
+}
+.off--ball {
+  transition-duration: 700ms;
+  border: 1px solid #3E3E3E;
+  background-color: #ffffff;
+}
+.logout {
+  position: absolute;
+  top: 14px;
+  right: 17px;
+
+  display: inline-block;
+  cursor: pointer;
+  font-family: "carmen-bold";
+  font-size: 17px;
+}

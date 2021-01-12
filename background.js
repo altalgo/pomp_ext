@@ -46,11 +46,12 @@ chrome.browserAction.onClicked.addListener(function (tab) {
         url: "https://pomp.leed.at/extlogin",
         type: "popup",
         height: 800,
-        width: 580
+        width: 580  
     }, function (win) {
     });
 });
-
+// key.pem
+// https://stackoverflow.com/questions/21497781/how-to-change-chrome-packaged-app-id-or-why-do-we-need-key-field-in-the-manifest/21500707#21500707
 chrome.storage.local.get('uuid', function (items) {
     console.log(items.uuid)
     if (items.uuid == undefined) {

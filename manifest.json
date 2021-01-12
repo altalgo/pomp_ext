@@ -15,9 +15,6 @@
             "matches": [
                 "*://docs.google.com/forms/*"
             ],
-            "css": [
-                "style.css"
-            ],
             "js": [
                 "preload.js"
             ]

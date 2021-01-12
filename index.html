@@ -6,19 +6,28 @@
     <meta http-equiv="Content-Security-Policy" ,
         content="default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'; img-src 'self' https://* data:; media-src * blob: filesystem:" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-    <style>
-        body {
-            width: 350px;
-            min-height: 180px;
-        }
-    </style>
+    <title>Pomp</title>
+    <link href="./style/css/fonts.css" rel="stylesheet">
+    <link href="./style/css/style.css" rel="stylesheet">
 </head>
 
 <body>
-    로그인 상태입니다
-    <button type="button" class="logout">로그아웃</button>
-
+    <div class="container">
+        <a href="https://pomp.leed.at" target="_blank">
+            <div class="pomp">
+                <span style="color:#3E3E3E;">Pom</span><span style="color:#92A8D1;">p</span>
+            </div>
+        </a>
+        <div class="switch--container on">
+            <div class="switch--status">ON</div>
+            <div class="switch--wrapper">
+                <div class="switch--stick on--stick"></div>
+                <div class="switch--ball on--ball"></div>
+            </div>
+        </div>
+        <div class="logout">SIGNOUT</div>
+    </div>
+    <script src="switch.js"></script>
     <script src="popup.js"></script>
 </body>
 
