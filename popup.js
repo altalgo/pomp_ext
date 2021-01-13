@@ -8,6 +8,8 @@ chrome.runtime.onMessage.addListener(
             alert('local success')
         } else if (req.msg == "msg") {
             console.log(req.content);
+        } else if (req.msg == "reloadPopup") {
+            location.reload();
         }
     }
 )
@@ -32,6 +34,7 @@ document.querySelector('.logout').onclick = () => {
     chrome.runtime.reload();
 }
 chrome.storage.local.get('uuid', (data) => {
+    console.log('uuid : ', data.uuid);
     if (data.uuid) {
         document.querySelector('.login').classList.remove('show')
         document.querySelector('.login').classList.add('hide')
@@ -49,7 +52,5 @@ chrome.storage.local.get('uuid', (data) => {
     }
 })
 document.querySelector('.login').onclick = () => {
-    chrome.runtime.sendMessage({ msg: "openLogin" }, (res) => {
-        console.log('done')
-    })
+    chrome.runtime.sendMessage({ msg: "openLogin" })
 }

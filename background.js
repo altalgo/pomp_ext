@@ -1,11 +1,6 @@
 chrome.runtime.onMessage.addListener(
     function (req, sender, res) {
-        if (req.msg == "loadForms") {
-            chrome.tabs.executeScript({
-                file: './toggleBodyClass.js'
-            });
-            res({ msg: "done" })
-        }else if(req.msg == "openLogin"){
+        if (req.msg == "openLogin") {
             chrome.windows.create({
                 // url: chrome.runtime.getURL("https://naver.com"),
                 url: "https://pomp.leed.at/extlogin",
@@ -14,6 +9,14 @@ chrome.runtime.onMessage.addListener(
                 width: 580
             }, function (win) {
             });
+        } else if (req.msg == "loginedLocal") {
+            chrome.storage.local.set({ uuid: req.uuid }, (result) => { });
+            chrome.browserAction.setPopup({
+                popup: chrome.extension.getURL('index.html')
+            }, function (tab) {
+
+            });
+            res.msg = "receivedLocal";
         }
     }
 );
@@ -24,24 +27,23 @@ chrome.runtime.onMessageExternal.addListener(
         if (req.msg == "loginedGoogle") {
             console.log('loginedGoogle')
             chrome.storage.local.set({ uuid: req.uuid }, (result) => { });
+            chrome.runtime.sendMessage({ msg: "reloadPopup" })
             chrome.browserAction.setPopup({
                 popup: chrome.extension.getURL('index.html')
-            }, function (tab) {
-
             });
         } else if (req.msg == "loginedKakao") {
             chrome.storage.local.set({ uuid: req.uuid }, (result) => { });
+            chrome.runtime.sendMessage({ msg: "reloadPopup" })
             chrome.browserAction.setPopup({
                 popup: chrome.extension.getURL('index.html')
-            }, function (tab) {
-
             });
+
         } else if (req.msg == "loginedLocal") {
             chrome.storage.local.set({ uuid: req.uuid }, (result) => { });
+
+            chrome.runtime.sendMessage({ msg: "reloadPopup" })
             chrome.browserAction.setPopup({
                 popup: chrome.extension.getURL('index.html')
-            }, function (tab) {
-
             });
         }
     }
