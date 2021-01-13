@@ -16,22 +16,28 @@ chrome.runtime.onMessage.addListener(
 
 document.querySelector('.logout').onclick = () => {
     chrome.storage.local.clear(function () {
-        var error = chrome.runtime.lastError;
+        const error = chrome.runtime.lastError;
         if (error) {
             console.error(error);
         }
     });
+
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'https://pompserver.leed.at/api/auth/logout');
     // xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onload = function (res) {
         console.log(res);
-        alert('logout success');
     };
     xhr.send('');
     // window.close();
-    // 하 ..
-    chrome.runtime.reload();
+    // 크롬 익스텐션 다시시작
+    // chrome.runtime.reload();
+    document.querySelector('.switch--container').classList.remove('show')
+    document.querySelector('.switch--container').classList.add('hide')
+    document.querySelector('.logout').classList.remove('show')
+    document.querySelector('.logout').classList.add('hide')
+    document.querySelector('.login').classList.add('show')
+    document.querySelector('.login').classList.remove('hide')
 }
 chrome.storage.local.get('uuid', (data) => {
     console.log('uuid : ', data.uuid);
@@ -54,3 +60,5 @@ chrome.storage.local.get('uuid', (data) => {
 document.querySelector('.login').onclick = () => {
     chrome.runtime.sendMessage({ msg: "openLogin" })
 }
+
+// 

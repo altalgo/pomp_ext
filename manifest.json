@@ -22,7 +22,7 @@
     ],
     "browser_action": {
         "default_icon": "./ico/favicon.png",
-        "default_popup": "./popup/index.html"
+        "default_popup": "index.html"
     },
     "permissions": [
         "tabs",
