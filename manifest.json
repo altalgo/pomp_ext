@@ -16,13 +16,13 @@
                 "*://docs.google.com/forms/*"
             ],
             "js": [
-                "preload.js"
+                "./preloads/preload.js"
             ]
         }
     ],
     "browser_action": {
         "default_icon": "./ico/favicon.png",
-        "default_popup": "index.html"
+        "default_popup": "./popup/index.html"
     },
     "permissions": [
         "tabs",
