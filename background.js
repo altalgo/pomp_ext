@@ -10,7 +10,7 @@ chrome.runtime.onMessage.addListener(
             }, function (win) {
             });
         } else if (req.msg == "loginedLocal") {
-            chrome.storage.local.set({ uuid: req.uuid }, (result) => { });
+            chrome.storage.local.set({ uuid: req.uuid, switch: true }, (result) => { });
             chrome.browserAction.setPopup({
                 popup: chrome.extension.getURL('index.html')
             }, function (tab) {
@@ -26,24 +26,31 @@ chrome.runtime.onMessageExternal.addListener(
         // uuid 저장
         if (req.msg == "loginedGoogle") {
             console.log('loginedGoogle')
-            chrome.storage.local.set({ uuid: req.uuid }, (result) => { });
+            chrome.storage.local.set({ uuid: req.uuid, switch: true }, (result) => { });
             chrome.runtime.sendMessage({ msg: "reloadPopup" })
             chrome.browserAction.setPopup({
                 popup: chrome.extension.getURL('index.html')
             });
-        } else if (req.msg == "loginedKakao") {
-            chrome.storage.local.set({ uuid: req.uuid }, (result) => { });
+        } else if (req.msg === "loginedKakao") {
+            chrome.storage.local.set({ uuid: req.uuid, switch: true }, (result) => { });
             chrome.runtime.sendMessage({ msg: "reloadPopup" })
             chrome.browserAction.setPopup({
                 popup: chrome.extension.getURL('index.html')
             });
 
-        } else if (req.msg == "loginedLocal") {
-            chrome.storage.local.set({ uuid: req.uuid }, (result) => { });
+        } else if (req.msg === "loginedLocal") {
+            chrome.storage.local.set({ uuid: req.uuid, switch: true }, (result) => { });
 
             chrome.runtime.sendMessage({ msg: "reloadPopup" })
             chrome.browserAction.setPopup({
                 popup: chrome.extension.getURL('index.html')
+            });
+        } else if (req.msg === "logoutBrowser") {
+            chrome.storage.local.clear(function () {
+                const error = chrome.runtime.lastError;
+                if (error) {
+                    console.error(error);
+                }
             });
         }
     }

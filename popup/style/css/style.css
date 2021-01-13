@@ -88,8 +88,10 @@ body {
   font-size: 17px;
 }
 .hide {
-  visibility: hidden;
+  /* visibility: hidden; */
+  display: none;
 }
 .show {
-  visibility: visible;
+  /* visibility: visible; */
+  display: inline-block;
 }

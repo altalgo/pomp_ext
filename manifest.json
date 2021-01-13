@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "POMP",
-    "description": "pomp",
+    "description": "구글폼 아카이브 서비스 Google Form Archive Service",
     "version": "1.0",
     "externally_connectable": {
         "matches": [
@@ -21,12 +21,10 @@
         }
     ],
     "browser_action": {
-        "default_icon": "./ico/favicon.png",
+        "default_icon": "./ico/pomp_logo.png",
         "default_popup": "index.html"
     },
     "permissions": [
-        "tabs",
-        "notifications",
         "activeTab",
         "*://docs.google.com/forms/*",
         "*://pompserver.leed.at/*",
