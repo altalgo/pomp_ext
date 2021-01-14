@@ -92,6 +92,10 @@ document.querySelector('.login').onclick = () => {
             document.querySelector('.login').classList.add('hide')
             document.querySelector('.logout').classList.add('show')
             document.querySelector('.logout').classList.remove('hide')
+            document.querySelector('.switch--stick').classList.add('on--stick');
+            document.querySelector('.switch--ball').classList.add('on--ball');
+            document.querySelector('.switch--stick').classList.remove('off--stick');
+            document.querySelector('.switch--ball').classList.remove('off--ball');
             document.querySelector('.switch--container').classList.add('show')
             document.querySelector('.switch--container').classList.remove('hide')
         } else {
