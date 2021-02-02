@@ -7,7 +7,6 @@ chrome.runtime.onMessage.addListener(
         } else if (req.msg == "loginedLocal") {
             alert('local success')
         } else if (req.msg == "msg") {
-            console.log(req.content);
         } else if (req.msg == "reloadPopup") {
             location.reload();
         }
@@ -26,7 +25,6 @@ document.querySelector('.logout').onclick = () => {
     xhr.open('GET', 'https://pompserver.leed.at/api/auth/logout');
     // xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onload = function (res) {
-        console.log(res);
     };
     xhr.send('');
     // window.close();
@@ -39,8 +37,8 @@ document.querySelector('.logout').onclick = () => {
     document.querySelector('.login').classList.add('show')
     document.querySelector('.login').classList.remove('hide')
 }
+
 chrome.storage.local.get(['uuid', 'switch'], (data) => {
-    console.log('uuid : ', data.uuid);
     if (data.uuid) {
         document.querySelector('.login').classList.remove('show')
         document.querySelector('.login').classList.add('hide')
@@ -56,10 +54,9 @@ chrome.storage.local.get(['uuid', 'switch'], (data) => {
         document.querySelector('.switch--container').classList.remove('show')
         document.querySelector('.switch--container').classList.add('hide')
     }
-    
+
     let eleSpan = document.querySelector('.switch--container .switch--status');
-    if(data.switch){
-        console.log('true!')
+    if (data.switch) {
         eleSpan.textContent = "ON";
         document.querySelector('.switch--container').classList.remove('off');
         document.querySelector('.switch--container').classList.add('on');
@@ -67,8 +64,7 @@ chrome.storage.local.get(['uuid', 'switch'], (data) => {
         document.querySelector('.switch--ball').classList.add('on--ball');
         document.querySelector('.switch--stick').classList.remove('off--stick');
         document.querySelector('.switch--ball').classList.remove('off--ball');
-    }else{
-        console.log('false!')
+    } else {
         eleSpan.textContent = "OFF";
         document.querySelector('.switch--container').classList.add('off');
         document.querySelector('.switch--container').classList.remove('on');
@@ -78,16 +74,17 @@ chrome.storage.local.get(['uuid', 'switch'], (data) => {
         document.querySelector('.switch--ball').classList.add('off--ball');
     }
 })
+
 document.querySelector('.login').onclick = () => {
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'https://pompserver.leed.at/api/auth/chkiflogined');
     // xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onload = function (res) {
-        console.log(res.currentTarget.response.uuid)
         const { uuid } = JSON.parse(res.currentTarget.response);
         if (uuid) {
             //지금 서버상으로는 로그인 상태
             chrome.storage.local.set({ uuid: uuid, switch: true }, (result) => { });
+            document.querySelector('.switch--status').textContent = "ON"
             document.querySelector('.login').classList.remove('show')
             document.querySelector('.login').classList.add('hide')
             document.querySelector('.logout').classList.add('show')
@@ -106,3 +103,28 @@ document.querySelector('.login').onclick = () => {
     xhr.send('');
 }
 
+chrome.storage.local.get(['uuid', 'switch'], (data) => {
+    if (data.uuid && !data.switch) return;
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', 'https://pompserver.leed.at/api/auth/chkiflogined');
+    // xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onload = function (res) {
+        const { uuid } = JSON.parse(res.currentTarget.response);
+        if (uuid) {
+            //지금 서버상으로는 로그인 상태
+            chrome.storage.local.set({ uuid: uuid, switch: true }, (result) => { });
+            document.querySelector('.switch--status').textContent = "ON"
+            document.querySelector('.login').classList.remove('show')
+            document.querySelector('.login').classList.add('hide')
+            document.querySelector('.logout').classList.add('show')
+            document.querySelector('.logout').classList.remove('hide')
+            document.querySelector('.switch--stick').classList.add('on--stick');
+            document.querySelector('.switch--ball').classList.add('on--ball');
+            document.querySelector('.switch--stick').classList.remove('off--stick');
+            document.querySelector('.switch--ball').classList.remove('off--ball');
+            document.querySelector('.switch--container').classList.add('show')
+            document.querySelector('.switch--container').classList.remove('hide')
+        }
+    };
+    xhr.send('');
+})

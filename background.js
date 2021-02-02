@@ -17,6 +17,9 @@ chrome.runtime.onMessage.addListener(
 
             });
             res.msg = "receivedLocal";
+        } else if (req.msg === "postHTML") {
+            // console.log('received postHTML msg');
+            postHTML(req.link);
         }
     }
 );
@@ -70,3 +73,49 @@ chrome.runtime.onMessageExternal.addListener(
 // });
 // key.pem
 // https://stackoverflow.com/questions/21497781/how-to-change-chrome-packaged-app-id-or-why-do-we-need-key-field-in-the-manifest/21500707#21500707
+
+function postHTML(href) {
+
+    let formKey = href.split('/')[href.split('/').length - 2];
+    let toSendKey;
+    // 현재 FORM에 해당하는 HTML의 key만 가져옴
+    chrome.storage.local.get(null, function (items) {
+        toSendKey = new Array(Object.keys(items).length);
+        Object.keys(items).filter((val, idx) => {
+            if (val.indexOf(formKey) !== -1) {
+                toSendKey[idx] = 1;
+            }
+        })
+    })
+
+    // 현재 FORM에 해당하는 HTML의 value와 uuid 가져옴
+    let toSendVal = {}, uuid;
+    chrome.storage.local.get(null, async function (items) {
+        uuid = items.uuid;
+        Object.values(items).map((val, idx) => {
+            if (toSendKey[idx] === 1) {
+                toSendVal[idx] = val;
+            }
+        })
+    })
+
+    // 서버로 전송
+    setTimeout(() => {
+        let xhr = new XMLHttpRequest();
+        xhr.open('POST', 'https://leed.at:3003/get');
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onload = function () {
+            // location.href = xhr.responseText;
+            // $.redirect('../register', xhr.response);
+        };
+        try {
+            xhr.send(JSON.stringify({
+                uuid: uuid,
+                formUrl: href,
+                question: toSendVal
+            }));
+        } catch (err) {
+            alert(err)
+        }
+    }, 2000)
+}

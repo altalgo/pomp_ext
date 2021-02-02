@@ -1,7 +1,8 @@
 {
     "manifest_version": 2,
     "name": "Pomp",
-    "description": "구글폼 아카이브 서비스 Google Form Archive Service",
+    "description": "__MSG_appDesc__",
+    "default_locale": "en",
     "version": "1.0",
     "externally_connectable": {
         "matches": [
@@ -25,7 +26,6 @@
         "default_popup": "index.html"
     },
     "permissions": [
-        "activeTab",
         "*://docs.google.com/forms/*",
         "*://pompserver.leed.at/*",
         "*://pomp.leed.at/*",
