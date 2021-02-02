@@ -102,7 +102,7 @@ function postHTML(href) {
     // 서버로 전송
     setTimeout(() => {
         let xhr = new XMLHttpRequest();
-        xhr.open('POST', 'https://leed.at:3003/get');
+        xhr.open('POST', 'https://pompcrawl.leed.at/get');
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onload = function () {
             // location.href = xhr.responseText;
